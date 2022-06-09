@@ -45,4 +45,16 @@ router.put('/vidas/update', (req, res) => {
     })
 })
 
+router.get('/usuario/id/:user', (req, res) => {
+    const user = req.params.user
+    pool.query('SELECT id_empleado FROM users WHERE user = ?', user, (error, result) => {
+        if (error) {
+            console.log(error)
+            res.send('Error')
+        } else {
+            res.send(result[0])
+        }
+    })
+})
+
 module.exports = router
