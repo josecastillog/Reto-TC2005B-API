@@ -9,6 +9,10 @@ const express = require('express')
 const { response } = require('express')
 const app = express()
 
+// Cors
+const cors = require('cors')
+app.use(cors())
+
 const port = process.env.PORT || 5000
 
 // Importar routes

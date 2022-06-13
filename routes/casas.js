@@ -58,4 +58,27 @@ router.get('/dinero/:id', (req, res) => {
     })
 })
 
+router.get('/ranking/', (req, res) => {
+    const query = 'SELECT user, tipoCasa FROM empleado JOIN users ON empleado.id = users.id_empleado ORDER BY tipoCasa DESC LIMIT 10'
+    pool.query(query, (error, result) => {
+        if (error) {
+            console.log(error)
+        } else {
+            var toSend = ''
+            for(let i = 0; i < 10; i++){
+                if (i === 0){
+                    toSend = result[0].user
+                } else {
+                    toSend = toSend.concat(" ", result[i].user)
+                }
+            }
+            const objToSend = {
+                ranking: toSend
+            }
+            res.send(objToSend)
+            // res.send(objToSend)
+        }
+    })
+})
+
 module.exports = router
